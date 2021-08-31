@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trading App Shortcut Links : )</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- author: alifatav (https://linktr.ee/alifatav) -->
+</head>
+<body>
+    <div class="w3-container">
+        <!-- Left Section -->
+        <div class="w3-quarter w3-card w3-margin-top">
+            <div class="w3-center">
+                <p>IDX - Indonesian Stock Exchange</p>
+            </div>
+            
+            <div id="left-link"></div>    
+        </div>
+        <!-- End of Left Section -->
+
+        <!-- Middle Section-->
+        <div class="w3-half">
+            <div class="w3-center">
+                <h1>Isikan Kode Saham</h1>
+                <div>
+                    <input type="text" placeholder="BBRI..." id="myInput" onchange="handleOnChangeInput()">
+                    <button onclick="handleOnChangeInput()">Cari</button>
+                </div>
+                <br/>
+                <input class="w3-check w3-small" id="is-new-tab" type="checkbox" onchange="handleOnChangeInput()">
+                <label>buka link di tab baru</label>
+            </div>
+            <hr/>
+            <div id="quick-link"></div>
+        </div>
+        <!-- End of Middle Section -->
+        
+        <!-- Right Section -->
+        <div class="w3-quarter w3-card w3-margin-top">
+            <div class="w3-center">
+                <p>News, Sites, Utility, Etc.</p>
+            </div>
+
+            <div id="right-link"></div>
+        </div>
+        <!-- End of Right Section -->
+
+        <script>
+            // Left Section
+            var LSLinks = [
+                {
+                    title: "E-IPO",
+                    url: `https://www.e-ipo.co.id/en`,
+                    isDropdown: false
+                },
+                {
+                    title: "Daftar Saham",
+                    url: `https://www.idx.co.id/data-pasar/data-saham/daftar-saham`,
+                    isDropdown: false
+                },
+                {
+                    title: "Ringkasan Perdagangan",
+                    url: "",
+                    isDropdown: true,
+                    dropdown: [
+                        {
+                            title: "Ringkasan",
+                            url: "https://www.idx.co.id/data-pasar/ringkasan-perdagangan/ringkasan-perdagangan"
+                        },
+                        {
+                            title: "Indeks",
+                            url: "https://www.idx.co.id/data-pasar/ringkasan-perdagangan/ringkasan-indeks"
+                        },
+                        {
+                            title: "Saham",
+                            url: "https://www.idx.co.id/data-pasar/ringkasan-perdagangan/ringkasan-saham"
+                        },
+                        {
+                            title: "Broker",
+                            url: "https://www.idx.co.id/data-pasar/ringkasan-perdagangan/ringkasan-broker"
+                        }
+                    ]
+                },
+                {
+                    title: "LapKeu Tahunan",
+                    url: `https://www.idx.co.id/perusahaan-tercatat/laporan-keuangan-dan-tahunan`,
+                    isDropdown: false
+                },
+                {
+                    title: "Anggota & Partisipan",
+                    url: "",
+                    isDropdown: true,
+                    dropdown: [
+                        {
+                            title: "Profil Anggota Bursa",
+                            url: "https://www.idx.co.id/anggota-bursa-dan-partisipan/profil-anggota-bursa"
+                        },
+                        {
+                            title: "Profil Partisipan",
+                            url: "https://www.idx.co.id/anggota-bursa-dan-partisipan/profil-partisipan"
+                        },
+                        {
+                            title: "Profil Dealer Utama",
+                            url: "https://www.idx.co.id/anggota-bursa-dan-partisipan/profil-dealer-utama"
+                        },
+                        {
+                            title: "Profil Pengguna Jasa SPPA",
+                            url: "https://www.idx.co.id/anggota-bursa-dan-partisipan/profil-pengguna-jasa-sppa"
+                        }
+                    ]
+                },
+                {
+                    title: "Kalender Bursa",
+                    url: `https://www.idx.co.id/perusahaan-tercatat/kalender-perusahaan-tercatat/`,
+                    isDropdown: false
+                },
+                {
+                    title: "Jam Perdagangan",
+                    url: `https://www.idx.co.id/investor/jam-perdagangan/`,
+                    isDropdown: false
+                },
+                {
+                    title: "Jadwal Libur Bursa",
+                    url: `https://www.idx.co.id/berita/jadwal-libur-bursa/`,
+                    isDropdown: false
+                },
+            ]
+
+            // Right Section
+            var RSLinks = [
+                {
+                    title: "KSEI Today's",
+                    url: `https://www.ksei.co.id/todays-announcements`,
+                    isDropdown: false
+                },
+                {
+                    title: "Annoumcement IDX",
+                    url: `https://www.idx.co.id/berita/pengumuman/`,
+                    isDropdown: false
+                },
+                {
+                    title: "UMA",
+                    url: `https://www.idx.co.id/berita/unusual-market-activity-uma`,
+                    isDropdown: false
+                },
+                {
+                    title: "Suspensi",
+                    url: `https://www.idx.co.id/berita/suspensi`,
+                    isDropdown: false
+                },
+                {
+                    title: "Corporate Action",
+                    url: `https://www.idx.co.id/perusahaan-tercatat/aksi-korporasi`,
+                    isDropdown: false
+                },
+                {
+                    title: "Investing.com",
+                    url: `https://id.investing.com/`,
+                    isDropdown: false
+                },
+                {
+                    title: "Google Finance Watchlist",
+                    url: `https://www.google.com/finance/portfolio/watchlist`,
+                    isDropdown: false
+                },
+                {
+                    title: "MSN Money",
+                    url: `https://www.msn.com/en-us/money/`,
+                    isDropdown: false
+                },
+            ]
+            
+            // Generate Side (Leftn Right) Section
+            function GenerateSideSection(links){
+                let textHtml = "";
+
+                function GenerateDropdown(dropdown){
+                    let txtDropdown = "";
+                    dropdown.forEach(d => {
+                        txtDropdown = txtDropdown + `<a  class="w3-bar-item w3-button" href="${d.url}" target="_self">${d.title}</a>`
+                    })
+
+                    return txtDropdown
+                }
+
+                links.forEach(e => {
+                    if(e.isDropdown){
+                        textHtml = textHtml + `
+                            <div class="w3-card w3-margin">
+                                <div class="w3-bar">
+                                    <button class="w3-bar-item w3-button" style="width:80%">${e.title}</button>
+                                    <div class="w3-dropdown-hover w3-button w3-bar-item w3-green" style="width:20%">
+                                        <i class="fa fa-caret-down"></i>
+                                        <div class="w3-dropdown-content w3-bar-block w3-border">
+                                            ${GenerateDropdown(e.dropdown)}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    } else {
+                        textHtml = textHtml + `
+                            <div class="w3-card w3-margin">
+                                <div class="w3-bar">
+                                    <button class="w3-bar-item w3-button" style="width:80%">${e.title}</button>
+                                    <a class="w3-bar-item w3-button w3-green" style="width:20%"
+                                        href="${e.url}" 
+                                        target="_self"
+                                    ><i class="fa fa-eye"></i></a>
+                                </div>
+                            </div>
+                        `
+                    }
+                });
+
+                return textHtml
+            }
+
+            // Execute Code to Display when Open
+            document.getElementById("left-link").innerHTML = GenerateSideSection(LSLinks);
+            document.getElementById("right-link").innerHTML = GenerateSideSection(RSLinks);
+
+            
+            // Handle Event in Middle Section
+            // Generate Text Html
+            function GenerateMiddleSection(inputVal, isNewTab){
+                // Quick Links
+                var links = [
+                    {
+                        title: "IDX Profile",
+                        url: `https://www.idx.co.id/perusahaan-tercatat/profil-perusahaan-tercatat/detail-profile-perusahaan-tercatat/?kodeEmiten=${inputVal}`
+                    },
+                    {
+                        title: "Google Finance",
+                        url: `https://www.google.com/finance/quote/${inputVal}:IDX`
+                    },
+                    {
+                        title: "TradingView",
+                        url: `https://id.tradingview.com/symbols/IDX-${inputVal}`
+                    },
+                    {
+                        title: "StockBit",
+                        url: `https://stockbit.com/#/symbol/${inputVal}`
+                    },
+                    {
+                        title: "Yahoo Finance",
+                        url: `https://finance.yahoo.com/quote/${inputVal}.JK`
+                    },
+                    {
+                        title: "Dunia Investasi",
+                        url: `http://www.duniainvestasi.com/bei/summaries/${inputVal}`
+                    },
+                    {
+                        title: "KSEI",
+                        url: `https://www.ksei.co.id/services/registered-securities/shares/lc/${inputVal}`
+                    }
+                ]
+                
+                // Set atribute target tab open
+                function getAttrValue(){
+                    if(isNewTab) return "_blank"
+                    return "_self"
+                }
+                
+                // Generate text Html
+                let textHtml = "";
+                links.forEach(e => {
+                    textHtml = textHtml + `
+                        <div class="w3-half">
+                            <div class="w3-card w3-margin">
+                                <div class="w3-bar">
+                                    <button class="w3-bar-item w3-button" style="width:80%">${e.title}</button>
+                                    <a class="w3-bar-item w3-button w3-green" style="width:20%"
+                                        href="${e.url}" 
+                                        target="${getAttrValue()}"
+                                    ><i class="fa fa-eye"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                });
+
+                return textHtml
+            }
+
+            // Handle something change in middle 
+            function handleOnChangeInput() {
+                var inputVal = document.getElementById("myInput").value;
+                var isNewTab = document.getElementById("is-new-tab").checked;
+
+                if(inputVal===""){
+                    alert("Isikan kode saham terlebih dahulu!")
+                } else{
+                    document.getElementById("quick-link").innerHTML = `
+                        <div>
+                            <div class="w3-center">
+                                <span><i>menampilkan link cepat ${inputVal}</i></span>
+                            </div>
+                            <div>
+                                ${GenerateMiddleSection(inputVal, isNewTab)}
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+       
+       </script>
+    </div>
+
+    <br/><br/><br/>
+    <div style="display: none;">
+        <a href="https://linktr.ee/alifatav" target="_blank">Linktree Alifatav</a>
+        <a href="https://www.linkedin.com/in/alifatav" target="_blank">Linkedin Alifatav</a>
+        <a href="https://www.instagram.com/alifatav/" target="_blank">Instagram Alifatav</a>
+        <a href="https://github.com/alifatav" target="_blank">Github Alifatav</a>
+    </div>
+</body>
+</html>
